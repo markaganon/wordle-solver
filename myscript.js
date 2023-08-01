@@ -38,26 +38,22 @@ function wordleSolver(greenLetters, yellowLetters, greyLetters, wordList) {
     for (var i = 0; i < filteredList.length; i++) { // iterating through words in filteredList
         var likelyValue = 0;
         for (var k = 0; k < 5; k++) { // iterating through letters in the words in filteredList
-                if (filteredList.at(i).at(k) == greenLetters.at(k)) {
-                    likelyValue = likelyValue + 2;
-                }
+            if (filteredList[i][k] == greenLetters.at(k)) {
+                likelyValue = likelyValue + 2;
+            }
         }
-        valueList.push([filteredList.at(i), likelyValue]);
+        valueList.push([filteredList[i], likelyValue]);
     }
 
     // YELLOW CHECK
     // need to check how many of the yellow letters are in these words
     for (var i = 0; i < valueList.length; i++) { // iterating through words in the list
-        if (valueList.at(i).at(0).includes(yellowLetters)) { // if 
-            for (var j = 0; j < valueList.at(i).at(0).length; j++) { // iterating through letters in the words in the list
-                for (var k = 0; k < yellowLetters.length; k++) { // iterating through yellowLetters to check for matches within each letter
-                    if (valueList.at(i).at(0).at(j) == yellowLetters.at(k)) {
-                        valueList[i][1]++; // if its a match increase the likelyvalue
-                    }
+        for (var j = 0; j < 5; j++) { // iterating through letters in the words in the list
+            for (var k = 0; k < yellowLetters.length; k++) { // iterating through yellowLetters to check for matches within each letter
+                if (valueList[i][0][j] == yellowLetters.at(k) && (j != k)) { // if it is equal to a yellow letter but not at the same position increase likely value
+                    valueList[i][1]++; 
                 }
             }
-        } else {
-            continue;
         }
     }
 
@@ -68,9 +64,9 @@ function wordleSolver(greenLetters, yellowLetters, greyLetters, wordList) {
 }
 
 // test
-let green = ['', '', 't', 'h', 'e'];
-let yellow = ['a'];
-let grey = ['r', 'm', 's', 'i'];
+let green = ['', '', '', '', ''];
+let yellow = ['', '', 'n', '', 's'];
+let grey = ['a', 'h', 'g'];
 
 console.log("after");
 
