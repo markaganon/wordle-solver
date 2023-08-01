@@ -60,13 +60,28 @@ function wordleSolver(greenLetters, yellowLetters, greyLetters, wordList) {
     // Now sort the array from highest likelyValue to lowest
     let sortedList = valueList.sort((a, b) => b[1] - a[1]);
 
-    return sortedList;
+    // lower down the size of the result array to only those with highest likely value
+    let maxLikelyValue = 0; 
+    for (let i = 0; i < sortedList.length; i++) {
+        if (sortedList[i][1] > maxLikelyValue) {
+            maxLikelyValue = sortedList[i][1];
+        }
+    }
+
+    let finalList = [];
+    for (let i = 0; i < sortedList.length; i++) {
+        if (sortedList[i][1] == maxLikelyValue) {
+            finalList.push(sortedList[i]);
+        }
+    }
+
+    return finalList;
 }
 
 // test
-let green = ['', '', '', '', ''];
-let yellow = ['', '', 'n', '', 's'];
-let grey = ['a', 'h', 'g'];
+let green = ['t', 'h', '', '', ''];
+let yellow = ['', '', '', '', ''];
+let grey = ['i', 'n', 'g', 'u', 'm', 'b', 'r', 'o', 'w', 'a', 'c', 'k'];
 
 console.log("after");
 
